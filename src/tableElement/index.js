@@ -11,64 +11,37 @@ export class Table extends React.Component{
     constructor(){
         super();
         this.state = {
-            cells:[{
-                key:'',
-                color:''
-            }]
+            0 : '#fff'
         }
       }
 
-    returnCurrentCellElement(key, cellState){
-
-      let thisElement = cellState.find(el => el.key === key) || null;
-      let thisElementIndex = cellState.indexOf(thisElement);
-
-      return {thisElement, thisElementIndex};
+    generateRandomColor(){
+      return '#' + Math.floor(Math.random() * MAX_HEXADECIMAL_NUMBER).toString(16);
     }
 
-    generateCellColor(key){ 
-        const CELLS = this.state.cells;
+    setCellColor(key){ 
+      let color;
 
-        let thisElement = this.returnCurrentCellElement(key, CELLS).thisElement;
-        let thisElementIndex = this.returnCurrentCellElement(key, CELLS).thisElementIndex;
-        let color;
+      if(this.state[key] === undefined){
+        color = this.generateRandomColor();
+      }
+      else{
+        color = this.state[key] === DEFAULT_CELL_COLOR ? this.generateRandomColor() : DEFAULT_CELL_COLOR;
+      }
 
-        try{
-           color = thisElement.color
-           color = (color === DEFAULT_CELL_COLOR) ? '#' + Math.floor(Math.random() * MAX_HEXADECIMAL_NUMBER).toString(16) : DEFAULT_CELL_COLOR;
-        }
-        catch(TypeError){
-          color = '#' + Math.floor(Math.random() * MAX_HEXADECIMAL_NUMBER).toString(16);
-        }
-  
-        if(thisElement){
-          this.state.cells.splice(thisElementIndex, 1);
-        }
-
-        this.state.cells.push({
-          key,
-          color
-        })
-
-        this.setState(state => ({
-          cells: state.cells
-        }))
+      this.setState({
+        [key] : color
+      })
     }
 
     getCellStyle(key){
-        const CELL = this.state.cells;
-
-        let thisElement = this.returnCurrentCellElement(key, CELL).thisElement;
-        let color;
-
-        try{
-            color = thisElement.color
-        }
-        catch(TypeError){
-            color = DEFAULT_CELL_COLOR;
-        }
+        let color = this.state[key]
 
         return {background: color};
+      }
+
+      returnSetCellColorFunc(key){
+        return () => this.setCellColor(key);
       }
 
     createGrid(){
@@ -77,12 +50,12 @@ export class Table extends React.Component{
 
       let blocks = [];
       let cells = [];
-      let key = 0
-    
+      let key = 0;
       for(let i=0;i<=WINDOW_HEIGHT-CELL_SIZE;i+=CELL_SIZE){
+        
         for(let j=0;j<=WINDOW_WIDTH;j+=CELL_SIZE){
           cells.push(
-          <Cell key={key} style={() => this.getCellStyle(key)} click={() => this.generateCellColor(key)}/>);
+          <Cell key={key} style={{background: this.state[key]}} click={this.returnSetCellColorFunc(key)}/>);
           key++;
         }
         blocks.push(<div key={key}>{cells}</div>);
