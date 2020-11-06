@@ -11,7 +11,7 @@ export class Table extends React.Component{
     constructor(){
         super();
         this.state = {
-            0 : '#fff'
+            0 : DEFAULT_CELL_COLOR
         }
       }
 
@@ -20,25 +20,16 @@ export class Table extends React.Component{
     }
 
     setCellColor(key){ 
-      let color;
-
-      if(this.state[key] === undefined){
-        color = this.generateRandomColor();
-      }
-      else{
-        color = this.state[key] === DEFAULT_CELL_COLOR ? this.generateRandomColor() : DEFAULT_CELL_COLOR;
-      }
+      const color = this.state[key];
+      const finalColor = color === DEFAULT_CELL_COLOR || 
+      color === undefined ? 
+      this.generateRandomColor() : 
+      DEFAULT_CELL_COLOR;
 
       this.setState({
-        [key] : color
+        [key] : finalColor
       })
     }
-
-    getCellStyle(key){
-        let color = this.state[key]
-
-        return {background: color};
-      }
 
       returnSetCellColorFunc(key){
         return () => this.setCellColor(key);
@@ -55,7 +46,7 @@ export class Table extends React.Component{
         
         for(let j=0;j<=WINDOW_WIDTH;j+=CELL_SIZE){
           cells.push(
-          <Cell key={key} style={{background: this.state[key]}} click={this.returnSetCellColorFunc(key)}/>);
+          <Cell key={key} style={{background: this.state[key]}} onClick={this.returnSetCellColorFunc(key)}/>);
           key++;
         }
         blocks.push(<div key={key}>{cells}</div>);
