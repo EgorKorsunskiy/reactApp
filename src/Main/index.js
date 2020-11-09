@@ -22,23 +22,46 @@ export class Main extends React.Component{
         this.setState(state => {
             return{
                 options: [
+                    ...state.options,
                     {
                         value
-                    },
-                    ...state.options
+                    }
                 ],
                 selected: state.selected
             }
         })
     }
 
-    selectOption = (e) => {
-        this.setState(state => {
-            return{
-                options: state.options,
-                selected: e.target.value
+    removeSelectedClasses(target){
+        for( let el of target.parentNode.children ){
+            if(el.classList.contains('selected')){
+                el.classList.remove('selected')
             }
-        })
+        }
+    }
+
+    selectOption = (e) => {
+        if(!e.target.classList.contains('title')){
+            this.removeSelectedClasses(e.target);
+
+            e.target.classList.toggle('selected')
+
+            this.setState(state => {
+                return{
+                    options: state.options,
+                    selected: e.target.innerText
+                }
+            })
+        }
+        else{
+            this.openSelectMenu(e)
+        }
+    }
+
+    openSelectMenu(e){
+        const target = e.target.parentNode.parentNode.children[1]
+
+        target.classList.toggle('open');
     }
 
     render(){

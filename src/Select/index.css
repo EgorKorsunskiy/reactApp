@@ -1,0 +1,40 @@
+.custom-select {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #394a6d;
+    width: 200px;
+    height: 30px;
+    margin: 1% 0 0 0;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-options-wrapper{
+    display: none;
+    height: auto;
+    width: 200px;
+    border: 1px solid  #394a6d;
+    border-top: none;
+}
+
+.custom-option{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    cursor: pointer;
+}
+
+.custom-option:not(.selected):hover{
+    background: lightgray;
+}
+
+.selected{
+    color: #fff;
+    background: #394a6d;
+}
+
+.open{
+    display: block;
+}
