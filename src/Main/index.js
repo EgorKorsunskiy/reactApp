@@ -27,41 +27,16 @@ export class Main extends React.Component{
                         value
                     }
                 ],
-                selected: state.selected
             }
         })
     }
 
-    removeSelectedClasses(target){
-        for( let el of target.parentNode.children ){
-            if(el.classList.contains('selected')){
-                el.classList.remove('selected')
+    selectOption = (value) => {
+        this.setState(
+            {
+                selected: value
             }
-        }
-    }
-
-    selectOption = (e) => {
-        if(!e.target.classList.contains('title')){
-            this.removeSelectedClasses(e.target);
-
-            e.target.classList.toggle('selected')
-
-            this.setState(state => {
-                return{
-                    options: state.options,
-                    selected: e.target.innerText
-                }
-            })
-        }
-        else{
-            this.openSelectMenu(e)
-        }
-    }
-
-    openSelectMenu(e){
-        const target = e.target.parentNode.parentNode.children[1]
-
-        target.classList.toggle('open');
+        )
     }
 
     render(){
@@ -71,7 +46,7 @@ export class Main extends React.Component{
                     <input placeholder='Add option'/>
                     <button onClick={this.addOption}>Add</button>
                 </div>
-                <Select options={this.state.options} onClick={() => this.selectOption}/>
+                <Select options={this.state.options} onSelect={this.selectOption}/>
                 <p>Selected: {this.state.selected}</p>
             </div>
         )
