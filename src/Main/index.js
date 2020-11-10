@@ -9,7 +9,8 @@ export class Main extends React.Component{
         this.state = {
             options: [
                 {
-                    value: 'exampleOption'
+                    value: 'exampleOption',
+                    isSelected: false
                 }
             ],
             selected: ''
@@ -31,12 +32,27 @@ export class Main extends React.Component{
         })
     }
 
-    selectOption = (value) => {
+    removeSelectClass(obj){
+        for(let el of obj){
+            el.isSelected = false;
+        }
+    }
+
+    selectOption = (value, index) => {
+        let options = [...this.state.options];
+        const isSelected = options[index].isSelected;
+
+        if(!isSelected){
+            this.removeSelectClass(options);
+        }
+        options[index].isSelected = !isSelected;
+
         this.setState(
-            {
-                selected: value
-            }
-        )
+                {
+                    options,
+                    selected: value
+                }
+            )
     }
 
     render(){

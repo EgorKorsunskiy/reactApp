@@ -10,30 +10,12 @@ export class Select extends React.Component{
         }
     }
 
-    removeSelectedClasses(target){
-        for( let el of target.parentNode.children ){
-            if(el.classList.contains('selected')){
-                el.classList.remove('selected')
-            }
-        }
-    }
-
-    openSelectMenu = (e) => {
-        const target = e.target.parentNode.parentNode.children[1];
-
-        target.classList.toggle('open');
-
+    openSelectMenu = () => {
         this.setState(state => {
             return{
                 isOpen: !state.isOpen
             }
         })
-    }
-
-    toggleSelectedElement = (e) => {
-        this.removeSelectedClasses(e.target);
-
-        e.target.classList.toggle('selected');
     }
 
     render(){
@@ -42,9 +24,9 @@ export class Select extends React.Component{
                 <div className='custom-select'>
                     <p onClick={this.openSelectMenu} className='title'>{this.props.options[0].value}</p>
                 </div>
-                <div className='custom-options-wrapper'>
+                <div className={this.state.isOpen?'custom-options-wrapper open': 'custom-options-wrapper'}>
                 {this.state.isOpen? this.props.options.map((el, i) => (
-                    <div key={i} className='custom-option' onClick={() => {this.props.onSelect(el.value)}, this.toggleSelectedElement} >{el.value}</div>
+                    <div key={i} className={el.isSelected?'custom-option selected': 'custom-option'} onClick={() => this.props.onSelect(el.value, i)} >{el.value}</div>
                 )): 
                 null
                 }

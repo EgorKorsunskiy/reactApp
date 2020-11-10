@@ -18,12 +18,17 @@
     border-top: none;
 }
 
+.title{
+    user-select: none;
+}
+
 .custom-option{
     display: flex;
     justify-content: center;
     align-items: center;
     height: 30px;
     cursor: pointer;
+    user-select: none;
 }
 
 .custom-option:not(.selected):hover{
