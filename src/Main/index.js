@@ -12,12 +12,19 @@ export class Main extends React.Component{
                     value: 'exampleOption'
                 }
             ],
+            inputData: '',
             selected: ''
         }
     }
 
-    addOption = (e) => {
-        const value = e.target.parentNode.children[0].value;
+    saveInputData = (e) => {
+        this.setState({
+            inputData: e.target.value
+        })
+    }
+
+    addOption = () => {
+        const value = this.state.inputData;
 
         this.setState(state => {
             return{
@@ -46,10 +53,12 @@ export class Main extends React.Component{
         return(
             <div>
                 <div>
-                    <input placeholder='Add option'/>
+                    <input placeholder='Add option' onInput={this.saveInputData}/>
                     <button onClick={this.addOption}>Add</button>
                 </div>
-                <Select options={this.state.options} selected={this.state.selected} onSelect={this.selectOption}/>
+                <Select options={this.state.options} 
+                selected={this.state.selected} 
+                onSelect={this.selectOption}/>
                 <p>Selected: {this.state.selected}</p>
             </div>
         )
