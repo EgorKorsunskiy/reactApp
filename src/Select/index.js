@@ -45,9 +45,9 @@ export class Select extends React.Component{
                 <div className='dropdown-select'>
                     <p onClick={this.toggleSelectMenu} 
                     className='dropdown-title'>
-                    {this.props.options.lenght?
-                    this.props.options[0].value || 'exampleOption':
-                    'exampleOption'}</p>
+                    {this.props.options.length?
+                    this.props.options[0].value || this.props.emptyOptionValue:
+                    this.props.emptyOptionValue}</p>
                 </div>
                 <div className={this.state.isOpen?'dropdown-options-wrapper dropdown-open': 'dropdown-options-wrapper'}>
                 {this.state.isOpen? this.props.options.map((el, i) => (

@@ -58,7 +58,8 @@ export class Main extends React.Component{
                 </div>
                 <Select options={this.state.options} 
                 selected={this.state.selected} 
-                onSelect={this.selectOption}/>
+                onSelect={this.selectOption}
+                emptyOptionValue=''/>
                 <p>Selected: {this.state.selected}</p>
             </div>
         )
