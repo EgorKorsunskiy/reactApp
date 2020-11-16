@@ -1,0 +1,17 @@
+.images-container{
+    background:#347fc4;
+    width: 100vw;
+    height: 90vh;
+    padding: 0 8vw 0 8vw;
+}
+.images-container-offset{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 5vh;
+    width: 100%;
+}
+.images-no_result{
+    color: #f0eff4;
+    text-align: center;
+}
