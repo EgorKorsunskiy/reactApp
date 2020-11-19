@@ -3,6 +3,7 @@
     width: 100vw;
     height: 90vh;
     padding: 0 8vw 0 8vw;
+    overflow: auto;
 }
 .images-container-offset{
     display: flex;

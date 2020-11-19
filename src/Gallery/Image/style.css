@@ -1,12 +1,19 @@
 .images-item{
-    width: 27vw;
-    height: 35vh;
     margin: 2vh 0 2vh 0;
     object-fit:cover;
     cursor: pointer;
     outline: none;
 }
-@media (max-width:1000px){
+.small{
+    width: 27vw;
+    height: 35vh;
+}
+.big{
+    width: 35vw;
+    height: 45vh;
+}
+
+@media (max-width:700px){
     .images-item{
         height: 35vw;
     }
