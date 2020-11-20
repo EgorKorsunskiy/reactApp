@@ -5,22 +5,6 @@ import './style.css';
 
 const KEY = '18601823-36af0fdddc3ba24537f0e57fc';
 
-const HEIGHT = window.innerHeight;
-const WIDTH = window.innerWidth; 
-
-const SEARCH_CONTAINER_PERSENT = 10;
-const IMAGE_CONTAINER_HEIGHT = HEIGHT - ((HEIGHT / 100) * SEARCH_CONTAINER_PERSENT);
-
-const IMAGE_OFFSET_PERCENT = 2;
-const IMAGE_OFFSET = (IMAGE_CONTAINER_HEIGHT / 100) * (IMAGE_OFFSET_PERCENT * 2);
-
-const IMAGE_IN_ROW = 3;
-const IMAGE_PERCENT = 35;
-const IMAGE_HEIGHT = ((HEIGHT / 100) * IMAGE_PERCENT) + IMAGE_OFFSET;
-const IMAGE_WIDTH = ((WIDTH / 100) * IMAGE_PERCENT) + IMAGE_OFFSET;
-
-const heightOrWidth = (WIDTH >= 700)?IMAGE_HEIGHT:IMAGE_WIDTH;
-
 export const OnSelect = React.createContext(null);
 export const SelectedOption = React.createContext(null);
 
@@ -55,8 +39,26 @@ export function Main() {
     setSelectedOption(value);
   }
 
-  const countTheNumberOfPictures = () => {
+  const calculateWidthAndHeight = (width, height) => {
+
+    const SEARCH_CONTAINER_PERSENT = 10;
+    const IMAGE_CONTAINER_HEIGHT = height - ((height / 100) * SEARCH_CONTAINER_PERSENT);
+
+    const IMAGE_OFFSET_PERCENT = 2;
+    const IMAGE_OFFSET = (IMAGE_CONTAINER_HEIGHT / 100) * (IMAGE_OFFSET_PERCENT * 2);
+
+    const IMAGE_IN_ROW = 3;
+    const IMAGE_PERCENT = 35;
+    const IMAGE_HEIGHT = ((height / 100) * IMAGE_PERCENT) + IMAGE_OFFSET;
+    const IMAGE_WIDTH = ((width / 100) * IMAGE_PERCENT) + IMAGE_OFFSET;
+
+    const heightOrWidth = (width >= 700)?IMAGE_HEIGHT:IMAGE_WIDTH;
+
     return Math.floor((Math.floor(IMAGE_CONTAINER_HEIGHT) / Math.floor(heightOrWidth))) * IMAGE_IN_ROW;
+  }
+
+  const countTheNumberOfPictures = () => {
+    return calculateWidthAndHeight(window.innerWidth, window.innerHeight);
   }
 
   const openImagesMenu = () => {
@@ -100,21 +102,18 @@ export function Main() {
       <div className={isOpen?"search-container search-container-after_search": 'search-container'}>
         <input type="text" placeholder="Enter something..." className="search-input" onInput={inputHandler}/>
         <button className="search-button" onClick={clickHandler}>{isSearch?'Searching':'Search'}</button>
-        <OnSelect.Provider value={selectOption}>
-          <SelectedOption.Provider value={selectedOption}>
-            <Select 
-              options={filterOptions}
-            />
-          </SelectedOption.Provider>
-        </OnSelect.Provider>
+          <Select 
+            options={filterOptions}
+            onSelect={selectOption}
+            selectedOption={selectedOption}
+          />
       </div>
       {
         isOpen?
-        <SelectedOption.Provider value={selectedOption}>
-          <Gallery
-            fetchedImages={fetchedImages}
-            customClassName='' />
-        </SelectedOption.Provider>:
+        <Gallery
+          fetchedImages={fetchedImages}
+          selectedOption={selectedOption}
+          customClassName='' />:
         null
       }
     </div>

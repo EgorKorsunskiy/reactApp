@@ -1,13 +1,9 @@
-import { useContext, useEffect, useState } from 'react';
-import { OnSelect, SelectedOption } from '../../Main'
+import { useEffect, useState } from 'react';
 import './index.css';
 
 export function SelectItem(props) {
     
     const [isOpen, setIsOpen] = useState(false)
-
-    const onSelect = useContext(OnSelect);
-    const selectedOption = useContext(SelectedOption);
 
     useEffect(() => {
         window.addEventListener('click', closeSelectMenu);
@@ -43,8 +39,8 @@ export function SelectItem(props) {
             <div className={isOpen?'dropdown-options-wrapper dropdown-item-options-wrapper dropdown-open': 'dropdown-options-wrapper dropdown-item-options-wrapper'}>
             {isOpen? props.options.map((el, i) => (
                 <div key={i}
-                    className={el === selectedOption?'dropdown-option dropdown-item-option dropdown-selected': 'dropdown-option dropdown-item-option'}
-                    onClick={() => onSelect(el)} >
+                    className={el === props.selectedOption?'dropdown-option dropdown-item-option dropdown-selected': 'dropdown-option dropdown-item-option'}
+                    onClick={() => props.onSelect(el)} >
                 {el}</div>
             )): 
             null

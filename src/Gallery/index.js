@@ -6,7 +6,11 @@ export function Gallery(props){
         <div className={`images-container ${props.customClassName}`}>
             <div className={`images-container-offset ${props.customClassName}`}>
                 {props.fetchedImages.map((el, i) => (
-                    <Image src={el.webformatURL} key={i} customClassName={props.customClassName} />
+                    <Image 
+                    src={el.webformatURL} 
+                    selectedOption={props.selectedOption}
+                    key={i} 
+                    customClassName={props.customClassName} />
                 ))}
             </div>
             {

@@ -42,6 +42,8 @@ export function Select(props) {
                 <SelectItem
                     title={el.title}
                     options={el.options}
+                    onSelect={props.onSelect}
+                    selectedOption={props.selectedOption}
                     key={i}
                 />
             )): 
