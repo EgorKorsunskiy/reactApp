@@ -1,0 +1,7 @@
+.range_slider-element{
+    display: table-cell;
+}
+
+.Active{
+    background:  rgb(42, 168, 42);
+}

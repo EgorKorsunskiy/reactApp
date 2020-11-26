@@ -1,0 +1,17 @@
+.range_slider-body{
+    display: table;
+    width: 400px;
+    height: 15px;
+    border: 2px solid rgb(17, 52, 209);
+    border-radius: 50px;
+    margin: 5px;
+}
+
+.cursor{
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: rgb(17, 52, 209);
+    cursor: pointer;
+}
