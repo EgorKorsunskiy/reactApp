@@ -1,10 +1,10 @@
 import { RangeSliderElement } from './RangeSliderElement';
 import './index.css';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 export const RangeSlider = (props) => {
 
-  let Xcoords = props.defaultX;
+    let Xcoords = props.defaultX;
 
   useEffect(() => {
     return () => {
@@ -30,13 +30,13 @@ export const RangeSlider = (props) => {
 
   const mouseMoveHandler = e => {
       Xcoords = e.clientX;
-      console.log(Xcoords)
       if(Xcoords < 7){
         Xcoords = 7;
       }
       else if(Xcoords > 400){
         Xcoords = 400;
       }
+      console.log(Xcoords)
   }
 
   const generateRangeSliderItems = () => {
@@ -46,7 +46,6 @@ export const RangeSlider = (props) => {
     for(let i=props.min;i<=props.max;i++){
       Elements.push(
       <RangeSliderElement 
-        isActive={i < props.value}
         updateValue={props.updateValue}
         value={i}
         width={ELEMENT_WIDTH}

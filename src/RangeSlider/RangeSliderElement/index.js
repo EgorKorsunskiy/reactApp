@@ -1,31 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import './index.css';
 
 export const RangeSliderElement = (props) => {
 
-    let isFirstRender = true;
+    const [isActive, setIsActive] = useState(false);
+    if(props.width * props.index <= props.X){
+        setIsActive(true);
 
-    const [isActive, setIsActive] = useState(props.isActive);
-
-    useEffect(() => {
-        if(isFirstRender){
-            isFirstRender = false;
+        props.updateValue(props.value);
+    }
+    else{
+        if(isActive){
+            setIsActive(false);
         }
-        else{
-            const x = props.width * props.value;
-
-            if(x - props.X >= 0){
-                props.updateValue(props.value);
-
-                setIsActive(true);
-            }
-            else{
-                if(isActive){
-                    setIsActive(false);
-                }
-            }
-            }
-    })
+    }
 
     return (
         <div className={
