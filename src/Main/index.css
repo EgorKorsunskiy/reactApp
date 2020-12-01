@@ -1,9 +1,15 @@
-.edit_inputs-container{
+.main-body{
     display: flex;
-    flex-direction: column;
+    justify-content: flex-end;
 }
-
-.edit_inputs-container input{
-    width: 200px;
+.main-body button{
+    cursor: pointer;
+    width: 70px;
+    height: 29px;
+    border: 2px solid  rgb(115, 115, 243);
+    background: #fff;
     margin: 5px;
+}
+.main-body button:hover{
+    background: lightgray;
 }

@@ -1,0 +1,21 @@
+.auth-body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.auth-body input{
+    width: 300px;
+    height: 25px;
+    border: none;
+    outline: none;
+}
+.auth-body button{
+    cursor: pointer;
+    height: 29px;
+    border: 2px solid  rgb(115, 115, 243);
+    background: #fff;
+}
+.auth-body button:hover{
+    background: lightgray;
+}
