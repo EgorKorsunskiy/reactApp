@@ -2,10 +2,23 @@ import { useState } from 'react';
 import { RangeSlider } from '../RangeSlider';
 import './index.css';
 
+const DEFAULT_X = 0;
+
 export const Main = () => {
     const [value, setValue] = useState(0);
     const [minValue, setMinValue] = useState(0);
     const [maxValue, setMaxValue] = useState(100);
+    const [Xcoords, setXcoords] = useState(DEFAULT_X);
+
+    const ELEMENT_WIDTH = 400 / maxValue;
+
+    const updateXcoords = (X) => {
+      setXcoords(X);
+    }
+
+    const updateValue = (value) => {
+        setValue(value);
+    }
 
     const valueOnInput = (e) => {
         setValue(e.target.value);
@@ -19,10 +32,6 @@ export const Main = () => {
         setMaxValue(e.target.value);
     }
 
-    const updateValue = (value) => {
-        setValue(value)
-    }
-
   return (
     <div className='body'>
         <div className='edit_inputs-container'>
@@ -32,11 +41,16 @@ export const Main = () => {
         </div>
         <div className='range_slider-container'>
             <RangeSlider 
-                value={value}
                 min={minValue}
                 max={maxValue}
+                X={
+                    Xcoords < value?
+                    value * ELEMENT_WIDTH:
+                    Xcoords
+                    }
+                width={ELEMENT_WIDTH}
+                updateX={updateXcoords}
                 updateValue={updateValue}
-                defaultX={0}
             />
             <p className='range_slider-value'>{value}</p>
         </div>
