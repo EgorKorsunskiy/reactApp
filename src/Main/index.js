@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
-import './index.css';
+import styles from './index.module.css';
 
 export const Main = () => {
 
     return (
-        <div className='main-body'>
-            <Link to='/auth' className='link'>
+        <div className={styles['main-body']}>
+            <Link to='/auth'>
                 <button>
                     Login
                 </button>

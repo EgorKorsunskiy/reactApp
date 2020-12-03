@@ -1,19 +1,24 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import './index.css';
+import styles from './index.module.css';
 
-export const Auth = ({username, onInput, errorMessage}) => {
+export const Auth = ({errorMessage}) => {
 
     const { errorIndex } = useParams();
+    const [username, setUsername] = useState('');
+
+    const editUsername = (e) => {
+      setUsername(e.target.value);
+    }
     
     useEffect(() => {
         if(typeof errorIndex === 'string' && !username){
             alert(errorMessage[errorIndex]);
         }
-    })
+    }, [username, errorMessage, errorIndex])
     return (
-        <div className='auth-body'>
-            <input className='username-input' onInput={onInput} />
+        <div className={styles['auth-body']}>
+            <input onInput={editUsername} />
             <Link to={username?
                 `/profile/${username}`:
                 `/auth/0`} >

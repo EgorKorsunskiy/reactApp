@@ -1,11 +1,11 @@
 import { useParams } from 'react-router-dom';
-import './index.css';
+import styles from './index.module.css';
 
 export const Profile = () => {
     const { username } = useParams();
 
     return (
-        <div className='profile-wrapper'>
+        <div className={styles['profile-wrapper']}>
              <h1>Hello {username}!</h1>
         </div>
     )
