@@ -1,10 +1,11 @@
 import { RangeSliderElement } from './RangeSliderElement';
 import './index.css';
 import { Draggable } from './Draggable/Draggable';
+import { useMemo } from 'react';
 
 export const RangeSlider = (props) => {
 
-  const generateRangeSliderItems = () => {
+  const generateRangeSliderItems = useMemo(() => {
     let Elements = [];
 
     for(let i=props.min;i<=props.max;i++){
@@ -16,11 +17,13 @@ export const RangeSlider = (props) => {
       );
     }
     return Elements;
-  }
+  }, [props.X, props.max, props.min, props.width]);
 
   return (
       <div className='range_slider-body'>
         <Draggable 
+          startXposition={props.startXposition}
+          endXposition={props.endXposition}
           updateX={props.updateX}
           updateValue={props.updateValue}
           currentX={props.X}
@@ -28,7 +31,7 @@ export const RangeSlider = (props) => {
           >
           <div className='cursor'></div>
         </Draggable>
-        {generateRangeSliderItems()}
+        {generateRangeSliderItems}
       </div>
   );
 };

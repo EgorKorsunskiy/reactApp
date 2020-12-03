@@ -10,15 +10,9 @@ export const Main = () => {
     const [maxValue, setMaxValue] = useState(100);
     const [Xcoords, setXcoords] = useState(DEFAULT_X);
 
-    const ELEMENT_WIDTH = 400 / maxValue;
-
-    const updateXcoords = (X) => {
-      setXcoords(X);
-    }
-
-    const updateValue = (value) => {
-        setValue(value);
-    }
+    const startXposition = 0;
+    const endXposition = 400;
+    const ELEMENT_WIDTH = endXposition / maxValue;
 
     const valueOnInput = (e) => {
         setValue(e.target.value);
@@ -49,8 +43,10 @@ export const Main = () => {
                     Xcoords
                     }
                 width={ELEMENT_WIDTH}
-                updateX={updateXcoords}
-                updateValue={updateValue}
+                startXposition={startXposition}
+                endXposition={endXposition}
+                updateX={setXcoords}
+                updateValue={setValue}
             />
             <p className='range_slider-value'>{value}</p>
         </div>

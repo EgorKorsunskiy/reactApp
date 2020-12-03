@@ -26,23 +26,21 @@ export class Draggable extends React.Component {
 
     mouseMoveHandler = e => {
         let transformX;
-        console.log(e.clientX)
-        if(e.clientX >= 0 + CHILD_WIDTH && e.clientX <= 400){
+        if(e.clientX >= this.props.startXposition + CHILD_WIDTH && e.clientX <= this.props.endXposition){
             transformX = e.clientX - this.initCoords.downX;
             this.props.updateValue(Math.round(transformX / this.props.width))
         }
         else{
-            if(e.clientX < 0 + CHILD_WIDTH){
-                transformX = 0;
+            if(e.clientX < this.props.startXposition + CHILD_WIDTH){
+                transformX = this.props.startXposition;
                 this.props.updateValue(Math.round(transformX / this.props.width))
             }
             else{
-                transformX = 400;
+                transformX = this.props.endXposition;
                 this.props.updateValue(Math.round(transformX / this.props.width))
                 transformX -= CHILD_WIDTH;
             }
         }
-        console.log(transformX)
         this.props.updateX(e.clientX);
         this.setState({transformX});
     }
